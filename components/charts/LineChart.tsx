@@ -1,8 +1,7 @@
-import { Line } from '@ant-design/plots';
-import { fail } from 'node:assert';
+import { Line, type LineConfig } from '@ant-design/plots';
 import React from "react";
 
-export const LineChart = ({className}:{className?:string}) => {
+export const LineChart = ({className}:{className?:string,}) => {
   const data = [
     { year: "1991", value: 3 },
     { year: "1992", value: 4 },
@@ -28,9 +27,8 @@ export const LineChart = ({className}:{className?:string}) => {
       },
     },
     style: {
-      lineWidth: 2,
+      lineWidth: 10,
     },
-    
   };
-  return <Line {...config} className={className} colorField="#d89614" />;
+  return <Line {...config} style={{width: '50%'}}  className={className} colorField="#d89614" />;
 };

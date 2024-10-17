@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   title: "Create Quiz",
   description: "best paltform for learing trade",
   icons: {
-    icon:'/logo.svg',
-},
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

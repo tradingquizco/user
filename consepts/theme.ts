@@ -1,5 +1,6 @@
 "use client";
-import { ThemeConfig } from "antd";
+import { GeisMono } from "@/app/fonts";
+import { theme, ThemeConfig } from "antd";
 
 const antThemeConfig: ThemeConfig = {
   token: {
@@ -12,7 +13,6 @@ const antThemeConfig: ThemeConfig = {
     sizeUnit: 4,
     wireframe: false,
   },
-  // algorithm: theme.darkAlgorithm
 };
 export default antThemeConfig;
 
