@@ -14,8 +14,8 @@ import { Avatar } from "antd";
 import AccountsList from "../accounts";
 
 export const navLinks: { path: string; name: string, icon: ReactNode }[] = [
-  { path: "/", name: "dashboard", icon: <DashboardOutlined />},
-  { path: "/explore", name: "Explore", icon: <UnorderedListOutlined />},
+  { path: "/", name: "Explore", icon: <UnorderedListOutlined />},
+  // { path: "/explore", name: "Explore", icon: <UnorderedListOutlined />},
   { path: "/payments", name: "Payments", icon: <BookOutlined/> },
   { path: "/my-packs", name: "My Packs", icon: <BookOutlined/> },
 ];
@@ -24,7 +24,7 @@ export const navLinks: { path: string; name: string, icon: ReactNode }[] = [
 const DesktopNavbar = () => {
   const {
     "1": { colorPrimary },
-  } = useToken();
+  } = useToken(); 
   const pathname = usePathname();
   const { push } = useRouter()
 
