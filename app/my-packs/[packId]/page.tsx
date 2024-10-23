@@ -6,7 +6,7 @@ import usePacks from "@/store/usePckes";
 import { Col, Empty, Flex, Layout, Row, Spin } from "antd";
 import React, { useEffect } from "react";
 
-const page = ({ params: { packId } }: { params: { packId: string } }) => {
+const QuizzesPage = ({ params: { packId } }: { params: { packId: string } }) => {
   const { loading, error } = useLoading();
   const { packQuizzes, getPackQuizzes } = usePacks();
 
@@ -26,7 +26,7 @@ const page = ({ params: { packId } }: { params: { packId: string } }) => {
           !error &&
           packQuizzes?.length !== 0 &&
           packQuizzes?.map((quiz) => (
-            <Col className="gutter-row" span={6}>
+            <Col className="gutter-row" span={6} key={quiz.id}>
               <QuizCard key={quiz.id} quiz={quiz} />{" "}
             </Col>
           ))}
@@ -35,4 +35,4 @@ const page = ({ params: { packId } }: { params: { packId: string } }) => {
   );
 };
 
-export default page;
+export default QuizzesPage;

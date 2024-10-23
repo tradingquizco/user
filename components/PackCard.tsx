@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { redirect, useRouter } from "next/navigation";
 import useLoading from "@/store/useLoading";
 import Link from "next/link";
+import { IPack } from "@/types";
 
 const PackCard = ({
   pack,

@@ -11,7 +11,7 @@ import Radio from "antd/es/radio/radio";
 import useQuizzes from "@/store/useQuizzes";
 import useLoading from "@/store/useLoading";
 
-const page = ({ params: { quizId } }: { params: { quizId: string } }) => {
+const QuizPage = ({ params: { quizId } }: { params: { quizId: string } }) => {
   const { selectedQuiz } = usePacks();
   const { getSubmitInfo, submitInfo, submitQuiz } = useQuizzes();
   const { error, loading } = useLoading();
@@ -77,7 +77,7 @@ const page = ({ params: { quizId } }: { params: { quizId: string } }) => {
                 defaultValue={submitInfo.selectedOption}
               >
                 {selectedQuiz.options.split(",").map((option: string) => (
-                  <Radio value={option}>{option}</Radio>
+                  <Radio value={option} key={option}>{option}</Radio>
                 ))}
               </Group>
             ) : (
@@ -86,7 +86,7 @@ const page = ({ params: { quizId } }: { params: { quizId: string } }) => {
                 onChange={(e) => setSelectedOption(e.target.value)}
               >
                 {selectedQuiz.options.split(",").map((option: string) => (
-                  <Radio value={option}>{option}</Radio>
+                  <Radio value={option} key={option}>{option}</Radio>
                 ))}
               </Group>
             )}
@@ -131,4 +131,4 @@ const page = ({ params: { quizId } }: { params: { quizId: string } }) => {
   );
 };
 
-export default page;
+export default QuizPage;
