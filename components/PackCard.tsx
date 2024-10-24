@@ -28,7 +28,7 @@ const PackCard = ({
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const cookies = Cookies.get("session");
+  const cookies = Cookies.get("sessionId");
   if (!cookies) redirect("/login");
 
   const session = JSON.parse(cookies);

@@ -13,8 +13,8 @@ const PacksPage = () => {
   const { getAccountPacks, accountPacks } = usePacks();
 
   useEffect(() => {
-    const cookies = Cookies.get("session");
-    if (!cookies) redirect("/login");
+    const cookies = Cookies.get("sessionId") ?? "";
+    // if (!cookies) redirect("/login");
     const session = JSON.parse(cookies);
 
     getAccountPacks(session.currentAccountId);
