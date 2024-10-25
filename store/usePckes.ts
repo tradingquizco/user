@@ -17,13 +17,13 @@ interface IUsePacksState {
 }
 interface IUsePacksAction {
   getAllPacks: () => void;
-  getAccountPacks: (accountId: string) => void;
+  getAccountPacks: (sessionId: string) => void;
   addPackToUserPacks: ({
-    accountId,
+    sessionId,
     packId,
     msgApi,
   }: {
-    accountId: number;
+    sessionId: string;
     packId: string;
     msgApi: MessageInstance;
   }) => void;
@@ -49,10 +49,10 @@ const usePacks = create<IUsePacksAction & IUsePacksState>((set, get) => ({
   },
 
   accountPacks: null,
-  getAccountPacks: async (accountId) => {
+  getAccountPacks: async (sessionId) => {
     useLoading.setState({ loading: true });
     const { data, isError } = await fetchClient({
-      url: `/packs/accountPacksList/${accountId}`,
+      url: `/packs/accountPacksList/${sessionId}`,
     });
     if (isError) {
       useLoading.setState({ loading: false, error: data });
@@ -63,14 +63,14 @@ const usePacks = create<IUsePacksAction & IUsePacksState>((set, get) => ({
     }
   },
 
-  addPackToUserPacks: async ({ packId, accountId, msgApi }) => {
+  addPackToUserPacks: async ({ packId, sessionId, msgApi }) => {
     msgApi.open({ type: "loading", content: "Adding Pack", duration: 0 });
     const { isError, data } = await fetchClient({
       url: "/users/addPack",
       options: {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ packId, accountId }),
+        body: JSON.stringify({ packId, sessionId }),
       },
     });
     if (isError) {

@@ -13,11 +13,9 @@ const PacksPage = () => {
   const { getAccountPacks, accountPacks } = usePacks();
 
   useEffect(() => {
-    const cookies = Cookies.get("sessionId") ?? "";
-    // if (!cookies) redirect("/login");
-    const session = JSON.parse(cookies);
+    const sessionId = Cookies.get("sessionId") ?? "";
 
-    getAccountPacks(session.currentAccountId);
+    getAccountPacks(sessionId);
   }, []);
   return (
     <Layout

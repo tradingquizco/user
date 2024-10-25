@@ -28,15 +28,13 @@ const PackCard = ({
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
-  const cookies = Cookies.get("sessionId");
-  if (!cookies) redirect("/login");
+  const sessionId = Cookies.get("sessionId") ?? "";
 
-  const session = JSON.parse(cookies);
   const buttonClick = () => {
     if (pack.isFree) {
       addPackToUserPacks({
         packId: pack.id,
-        accountId: session.currentAccountId,
+        sessionId: sessionId,
         msgApi,
       });
     } else {
