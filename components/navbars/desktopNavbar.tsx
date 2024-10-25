@@ -18,8 +18,8 @@ import { Avatar, Dropdown, Space } from "antd";
 import AccountsList from "../accounts";
 
 export const navLinks: { path: string; name: string; icon: ReactNode }[] = [
-  { path: "/", name: "dashboard", icon: <DashboardOutlined /> },
-  { path: "/explore", name: "Explore", icon: <UnorderedListOutlined /> },
+  { path: "/", name: "Explore", icon: <UnorderedListOutlined /> },
+  // { path: "/explore", name: "Explore", icon: <UnorderedListOutlined />},
   { path: "/payments", name: "Payments", icon: <BookOutlined /> },
   { path: "/my-packs", name: "My Packs", icon: <BookOutlined /> },
 ];

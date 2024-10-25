@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { create } from "zustand";
 import useLoading from "./useLoading";
 import { MessageInstance } from "antd/es/message/interface";
+import { IPack, IQuiz } from "@/types";
 
 interface IUsePacksState {
   allPacks: IPack[] | null;

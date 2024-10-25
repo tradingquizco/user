@@ -1,4 +1,4 @@
-interface IPack {
+export interface IPack {
   id: string;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ interface IPack {
   isFree: boolean;
 }
 
-interface IQuiz {
+export interface IQuiz {
   id: string;
   title: string;
   description: string;
@@ -36,8 +36,17 @@ interface IQuiz {
   packId: string;
 }
 
+export interface IQuizAttempt {
+  id: string;
+  selectedOption: string;
+  isCurrect: string;
+  createdAt: string;
+  updatedAt: string;
+  accountId: string;
+  quizId: string;
+}
 
-export type ActionState = {
-  message: string,
-  isError: boolean,
+export interface ISubmitInfo {
+  isCurrect: boolean;
+  selectedOption: string;
 }

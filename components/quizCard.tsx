@@ -1,6 +1,7 @@
 "use client";
 
 import usePacks from "@/store/usePckes";
+import { IQuiz } from "@/types";
 import { Button, Card, Image } from "antd";
 import Meta from "antd/es/card/Meta";
 import { redirect, usePathname } from "next/navigation";
@@ -28,7 +29,7 @@ const QuizCard = ({ quiz }: { quiz: IQuiz }) => {
         />
       }
       actions={[
-        <Button type="primary" className="w-3/4" onClick={clickHandler}>
+        <Button key={"1"} type="primary" className="w-3/4" onClick={clickHandler}>
           Check Out Quiz
         </Button>,
       ]}
