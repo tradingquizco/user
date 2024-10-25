@@ -29,7 +29,7 @@
 import PackCard from "@/components/PackCard";
 import useLoading from "@/store/useLoading";
 import usePacks from "@/store/usePckes";
-import { Empty, Flex, Layout, Spin } from "antd";
+import { Col, Empty, Flex, Layout, Row, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 
 const Explore = () => {
@@ -49,7 +49,16 @@ const Explore = () => {
       <Flex wrap align="start" justify="center" className="w-full">
         {loading && <Spin fullscreen />}
         {!loading && !error && allPacks?.length === 0 && <Empty />}
-        {!loading && !error &&  allPacks?.length !== 0 && allPacks?.map((pack) => <PackCard key={pack.id} pack={pack}/>)}
+        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+          {!loading &&
+            !error &&
+            allPacks?.length !== 0 &&
+            allPacks?.map((pack) => (
+              <Col className="gutter-row" span={6} key={pack.id}>
+                <PackCard key={pack.id} pack={pack} isPackAdded />
+              </Col>
+            ))}
+        </Row>
       </Flex>
     </Layout>
   );
