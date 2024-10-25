@@ -19,12 +19,10 @@ const useQuizzes = create<IUseQuizzes>((set, get) => ({
   submitInfo: null,
   getSubmitInfo: async (quizId) => {
     useLoading.setState({ loading: true });
-    const cookie = Cookies.get("session");
-    if (!cookie) return cookie;
-    const session = JSON.parse(cookie);
+    const sessionId = Cookies.get("sessionId");
 
     const { data, isError } = await fetchClient({
-      url: `/quizzes/submit/Info?quizId=${quizId}&accountId=${session.currentAccountId}`,
+      url: `/quizzes/submit/Info?quizId=${quizId}&sessionId=${sessionId}`,
     });
     if (isError) {
       useLoading.setState({ loading: false, error: data });
@@ -36,9 +34,7 @@ const useQuizzes = create<IUseQuizzes>((set, get) => ({
 
   submitQuiz: async ({ isCurrect, quizId, selectedOption }) => {
     useLoading.setState({ loading: true });
-    const cookie = Cookies.get("session");
-    if (!cookie) return cookie;
-    const session = JSON.parse(cookie);
+    const sessionId = Cookies.get("sessionId")
 
     const { data, isError } = await fetchClient({
       url: `/quizzes/submit`,
@@ -50,7 +46,7 @@ const useQuizzes = create<IUseQuizzes>((set, get) => ({
 
         body: JSON.stringify({
           quizId,
-          accountId: session.currentAccountId,
+          sessionId: sessionId,
           selectedOption,
           isCurrect,
         }),
