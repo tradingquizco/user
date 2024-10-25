@@ -9,37 +9,64 @@ import useToken from "antd/es/theme/useToken";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import { BookOutlined,  DashboardOutlined, UnorderedListOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+import {
+  BookOutlined,
+  DashboardOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
+import { Avatar, Dropdown, Space } from "antd";
 import AccountsList from "../accounts";
 
-export const navLinks: { path: string; name: string, icon: ReactNode }[] = [
-  { path: "/", name: "dashboard", icon: <DashboardOutlined />},
-  { path: "/explore", name: "Explore", icon: <UnorderedListOutlined />},
-  { path: "/payments", name: "Payments", icon: <BookOutlined/> },
-  { path: "/my-packs", name: "My Packs", icon: <BookOutlined/> },
+export const navLinks: { path: string; name: string; icon: ReactNode }[] = [
+  { path: "/", name: "dashboard", icon: <DashboardOutlined /> },
+  { path: "/explore", name: "Explore", icon: <UnorderedListOutlined /> },
+  { path: "/payments", name: "Payments", icon: <BookOutlined /> },
+  { path: "/my-packs", name: "My Packs", icon: <BookOutlined /> },
 ];
 
+const items = [
+  {
+    label: <a href="/setting">1st menu iteeem</a>,
+    key: "0",
+  },
+  {
+    label: <a href="https://www.aliyun.com">2nd menu item</a>,
+    key: "1",
+  },
+  {
+    type: "divider",
+  },
+  {
+    label: "3rd menu item",
+    key: "3",
+  },
+];
 
 const DesktopNavbar = () => {
   const {
     "1": { colorPrimary },
   } = useToken();
   const pathname = usePathname();
-  const { push } = useRouter()
+  const { push } = useRouter();
 
   return (
     <nav className="w-full h-full flex items-center justify-between px-5 max-md:hidden">
       <div className="links flex gap-5">
-        <div className="flex items-center justify-center gap cursor-pointer" onClick={() => push("/")}>
-          <Image src={'/logo.svg'} alt="logo" width={35} height={35} />
+        <div
+          className="flex items-center justify-center gap cursor-pointer"
+          onClick={() => push("/")}
+        >
+          <Image src={"/logo.svg"} alt="logo" width={35} height={35} />
           <Title level={4} className="!m-0">
             TradingQuiz
           </Title>
         </div>
         <ul className="flex items-center justify-center gap-2">
-          {navLinks.map(({ name, path, icon}) => (
-            <li className={`hover:text-${colorPrimary} cursor-pointer`} key={path}>
+          {navLinks.map(({ name, path, icon }) => (
+            <li
+              className={`hover:text-${colorPrimary} cursor-pointer`}
+              key={path}
+            >
               <Link href={path}>
                 <Text
                   type="secondary"
@@ -57,8 +84,23 @@ const DesktopNavbar = () => {
       </div>
 
       <div className="flex items-center justify-center gap-3 h-full w-auto">
-          <AccountsList />
-          <Avatar size={45} shape="square" src="https://avatars.githubusercontent.com/u/88265699?v=4"/>
+        <AccountsList />
+        <Dropdown
+          menu={{
+            items,
+          }}
+          trigger={["click"]}
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              <Avatar
+                size={45}
+                shape="square"
+                src="https://avatars.githubusercontent.com/u/88265699?v=4"
+              />
+            </Space>
+          </a>
+        </Dropdown>
       </div>
     </nav>
   );

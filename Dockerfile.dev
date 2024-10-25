@@ -1,28 +1,12 @@
-FROM node:20-alpine AS base
+FROM node:20-alpine
 
-FROM base AS deps
+WORKDIR /app
 RUN apk add --no-cache libc6-compat
-WORKDIR /app
 COPY package.json package-lock.json ./
-# RUN npm install -D @swc/cli @swc/core
 RUN npm i
-
-FROM base AS runner
-WORKDIR /app
-ENV NODE_ENV development
-
-RUN if ! id "nextjs" &>/dev/null; then \
-  addgroup --system --gid 1002 nodejs && \
-  adduser --system --ingroup nodejs nextjs; \
-  fi
-
-COPY --from=deps /app/node_modules ./node_modules
-COPY ./public /app/public
 COPY . .
 
-RUN chown -R nextjs:nodejs /app
-
-USER nextjs
+ENV NODE_ENV developdment
 
 EXPOSE 3001
 
