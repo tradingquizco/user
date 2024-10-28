@@ -22,10 +22,16 @@ const PacksPage = () => {
       className="bg-white"
       style={{ height: "calc(100vh - 3.5rem - 24px)" }}
     >
-      <Flex wrap align="start" justify="center" className="w-full">
+      <Flex wrap align="start" justify="start" gap={10} className="w-full">
         {loading && <Spin fullscreen />}
         {!loading && !error && accountPacks?.length === 0 && <Empty />}
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+        {!loading &&
+          !error &&
+          accountPacks?.length !== 0 &&
+          accountPacks?.map((pack) => (
+            <PackCard key={pack.id} pack={pack} isPackAdded />
+          ))}
+        {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           {!loading &&
             !error &&
             accountPacks?.length !== 0 &&
@@ -34,7 +40,7 @@ const PacksPage = () => {
                 <PackCard key={pack.id} pack={pack} isPackAdded />
               </Col>
             ))}
-        </Row>
+        </Row> */}
       </Flex>
     </Layout>
   );

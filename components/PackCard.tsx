@@ -8,10 +8,10 @@ import React, { useEffect, useState } from "react";
 import { PlusOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import usePacks from "@/store/usePckes";
 import Cookies from "js-cookie";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import useLoading from "@/store/useLoading";
-import Link from "next/link";
 import { IPack } from "@/types";
+import useUser from "@/store/useUser";
 
 const PackCard = ({
   pack,
@@ -25,6 +25,7 @@ const PackCard = ({
 
   const { loading } = useLoading();
   const { addPackToUserPacks } = usePacks();
+  const { isUserInvitesUsers, setIsUserInvitesUsers } = useUser();
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -38,9 +39,22 @@ const PackCard = ({
         msgApi,
       });
     } else {
+      if (isUserInvitesUsers) {
+        addPackToUserPacks({
+          packId: pack.id,
+          sessionId: sessionId,
+          msgApi,
+        });
+      } else {
+        msgApi.error("you should Invite two people to use this pack");
+      }
       //Pack with price
     }
   };
+
+  useEffect(() => {
+    setIsUserInvitesUsers();
+  }, []);
 
   return (
     <Content className="w-[95%] h-[250px] rounded-md max-w-[650px] max-sm:h-[450px] border">
@@ -60,13 +74,17 @@ const PackCard = ({
         </div>
         <div className="w-1/2 h-full overflow-y-auto max-sm:w-full max-sm:h-[400px]">
           <Flex vertical className="w-full" align="start" justify="start">
-            <Flex vertical gap={8}>
-              <Flex justify="space-between" align="center">
+            <Flex vertical gap={8} className="w-full">
+              <Flex justify="space-between" align="center" className="w-full">
                 <Title level={4} className="!m-0">
                   {pack.title}
                 </Title>
                 <Text className="text-primary">
-                  {pack.isFree ? "Free" : `$${pack.price}`}
+                  {pack.isFree
+                    ? "Free"
+                    : isUserInvitesUsers
+                    ? "Free"
+                    : `Invite`}
                 </Text>
               </Flex>
               <P
@@ -81,9 +99,6 @@ const PackCard = ({
                 className="text-justify"
               >
                 {pack.description}
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque
-                nemo, recusandae officiis rerum mollitia odit deleniti
-                asperiores et incidunt quisquam!
               </P>
             </Flex>
             <Flex vertical className="w-full">
@@ -124,7 +139,11 @@ const PackCard = ({
                       ) : (
                         <ShoppingCartOutlined className="scale-110" />
                       )}
-                      {!loading && pack.isFree ? "Add Pack" : "Buy Pack"}
+                      {!loading && isUserInvitesUsers
+                        ? "Add Pack"
+                        : pack.isFree
+                        ? "Add Pack"
+                        : "Invite"}
                     </Flex>
                   </Button>
                 ) : (
