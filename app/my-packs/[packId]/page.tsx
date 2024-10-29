@@ -6,7 +6,11 @@ import usePacks from "@/store/usePckes";
 import { Col, Empty, Flex, Layout, Row, Spin } from "antd";
 import React, { useEffect } from "react";
 
-const QuizzesPage = ({ params: { packId } }: { params: { packId: string } }) => {
+const QuizzesPage = ({
+  params: { packId },
+}: {
+  params: { packId: string };
+}) => {
   const { loading, error } = useLoading();
   const { packQuizzes, getPackQuizzes } = usePacks();
 
@@ -21,7 +25,14 @@ const QuizzesPage = ({ params: { packId } }: { params: { packId: string } }) => 
     >
       {loading && <Spin fullscreen />}
       {!loading && !error && packQuizzes?.length === 0 && <Empty />}
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+      <Flex wrap align="center" justify="center" gap={10} className="w-full">
+        {!loading &&
+          !error &&
+          packQuizzes?.length !== 0 &&
+          packQuizzes?.map((quiz) => <QuizCard key={quiz.id} quiz={quiz} />)}
+      </Flex>
+
+      {/* <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
         {!loading &&
           !error &&
           packQuizzes?.length !== 0 &&
@@ -30,7 +41,7 @@ const QuizzesPage = ({ params: { packId } }: { params: { packId: string } }) => 
               <QuizCard key={quiz.id} quiz={quiz} />{" "}
             </Col>
           ))}
-      </Row>
+      </Row> */}
     </Layout>
   );
 };

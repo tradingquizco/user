@@ -9,38 +9,47 @@ import useToken from "antd/es/theme/useToken";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname, useRouter } from "next/navigation";
-import { BookOutlined,  DashboardOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import {
+  BookOutlined,
+  DashboardOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 import { Avatar, Button } from "antd";
 import AccountsList from "../accounts";
 import Cookies from "js-cookie";
 
-export const navLinks: { path: string; name: string, icon: ReactNode }[] = [
-  { path: "/", name: "Explore", icon: <UnorderedListOutlined />},
+export const navLinks: { path: string; name: string; icon: ReactNode }[] = [
+  { path: "/", name: "Explore", icon: <UnorderedListOutlined /> },
   // { path: "/explore", name: "Explore", icon: <UnorderedListOutlined />},
-  { path: "/payments", name: "Payments", icon: <BookOutlined/> },
-  { path: "/my-packs", name: "My Packs", icon: <BookOutlined/> },
+  { path: "/payments", name: "Payments", icon: <BookOutlined /> },
+  { path: "/my-packs", name: "My Packs", icon: <BookOutlined /> },
 ];
-
 
 const DesktopNavbar = () => {
   const {
     "1": { colorPrimary },
-  } = useToken(); 
+  } = useToken();
   const pathname = usePathname();
-  const { push } = useRouter()
+  const { push } = useRouter();
 
   return (
     <nav className="w-full h-full flex items-center justify-between px-5 max-md:hidden">
       <div className="links flex gap-5">
-        <div className="flex items-center justify-center gap cursor-pointer" onClick={() => push("/")}>
-          <Image src={'/logo.svg'} alt="logo" width={35} height={35} />
+        <div
+          className="flex items-center justify-center gap cursor-pointer"
+          onClick={() => push("/")}
+        >
+          <Image src={"/logo.svg"} alt="logo" width={35} height={35} />
           <Title level={4} className="!m-0">
             TradingQuiz
           </Title>
         </div>
         <ul className="flex items-center justify-center gap-2">
-          {navLinks.map(({ name, path, icon}) => (
-            <li className={`hover:text-${colorPrimary} cursor-pointer`} key={path}>
+          {navLinks.map(({ name, path, icon }) => (
+            <li
+              className={`hover:text-${colorPrimary} cursor-pointer`}
+              key={path}
+            >
               <Link href={path}>
                 <Text
                   type="secondary"
@@ -58,8 +67,16 @@ const DesktopNavbar = () => {
       </div>
 
       <div className="flex items-center justify-center gap-3 h-full w-auto">
-      <Button danger onClick={() => {Cookies.remove("sessionToken"); Cookies.remove("sessionId")}}>Log Out</Button>
-
+        
+        <Button
+          danger
+          onClick={() => {
+            Cookies.remove("sessionToken");
+            Cookies.remove("sessionId");
+          }}
+        >
+          Log Out
+        </Button>
       </div>
     </nav>
   );

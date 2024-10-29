@@ -20,8 +20,8 @@ const QuizCard = ({ quiz }: { quiz: IQuiz }) => {
 
   return (
     <Card
-      className="rounded-md"
-      style={{ width: 300 }}
+      className="rounded-md overflow-hidden"
+      style={{ width: 300, height: 430}}
       cover={
         <img
           alt="question-img"
@@ -34,7 +34,7 @@ const QuizCard = ({ quiz }: { quiz: IQuiz }) => {
         </Button>,
       ]}
     >
-      <Meta title={quiz.title} description={quiz.description} />
+      <Meta title={quiz.title} description={quiz.questionText} />
     </Card>
   );
 };
