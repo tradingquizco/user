@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, Divider, Drawer } from "antd";
+import { Avatar, Button, Divider, Drawer, Flex } from "antd";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import AccountsList from "../accounts";
 import Cookies from "js-cookie";
+import Invite from "../Invite";
 
 const MobileNavbar: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -74,47 +75,18 @@ const MobileNavbar: React.FC = () => {
             ))}
           </ul>
 
-          {/* <div className="w-full">
-            <Divider>
-              <Text type="secondary">Accounts</Text>
-            </Divider>
-            <div className="flex items-center justify-between w-full h-fit my-5">
-              <Text type="secondary" className="w-">
-                Current Username:
-              </Text>
-              <Text>mohmmad-k13</Text>
-            </div>
-            <div className="flex items-center justify-between w-full h-fit">
-              <Text type="secondary" className="w-full">
-                Change Account:
-              </Text>
-              <AccountsList />
-            </div>
-
-            <Divider>
-              <Text type="secondary">user information</Text>
-            </Divider>
-            <div className="w-full flex items-center justify-start gap-5 mt-4">
-              <Avatar
-                size={45}
-                shape="square"
-                src="https://avatars.githubusercontent.com/u/88265699?v=4"
-              />
-              <div className="flex items-start justify-center flex-col">
-                <Text className="font-bold text-start">mohammad</Text>
-                <Text type="secondary">mohammad@gmail.com</Text>
-              </div>
-            </div>
-          </div> */}
-          <Button
-            danger
-            onClick={() => {
-              Cookies.remove("sessionToken");
-              Cookies.remove("sessionId");
-            }}
-          >
-            Log Out
-          </Button>
+          <Flex className="w-full" justify="space-between" align="center">
+            <Invite />
+            <Button
+              danger
+              onClick={() => {
+                Cookies.remove("sessionToken");
+                Cookies.remove("sessionId");
+              }}
+            >
+              Log Out
+            </Button>
+          </Flex>
         </div>
       </Drawer>
     </nav>

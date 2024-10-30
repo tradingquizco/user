@@ -21,7 +21,7 @@ const QuizCard = ({ quiz }: { quiz: IQuiz }) => {
   return (
     <Card
       className="rounded-md overflow-hidden"
-      style={{ width: 300, height: 430}}
+      style={{ width: 300}}
       cover={
         <img
           alt="question-img"

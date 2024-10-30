@@ -13,10 +13,16 @@ import {
   BookOutlined,
   DashboardOutlined,
   UnorderedListOutlined,
+  UserAddOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button } from "antd";
+import { Avatar, Button, Divider, Flex, Modal } from "antd";
 import AccountsList from "../accounts";
 import Cookies from "js-cookie";
+import DropdownButton from "antd/es/dropdown/dropdown-button";
+import Paragraph from "antd/es/typography/Paragraph";
+import OTP from "antd/es/input/OTP";
+import Invite from "../Invite";
 
 export const navLinks: { path: string; name: string; icon: ReactNode }[] = [
   { path: "/", name: "Explore", icon: <UnorderedListOutlined /> },
@@ -67,7 +73,7 @@ const DesktopNavbar = () => {
       </div>
 
       <div className="flex items-center justify-center gap-3 h-full w-auto">
-        
+        <Invite />
         <Button
           danger
           onClick={() => {
